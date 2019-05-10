@@ -40,6 +40,11 @@ func convertSGDtoIDR(salary int) {
 	fmt.Println("Your salary in IDR: ", salary*10482)
 }
 
+func (e *UserDetail) changeFirstName(firstName string) string {
+	e.firstName = firstName
+	return e.firstName
+}
+
 func main() {
 	//Type-1 to define a struct.
 	var user1 = UserDetail{"Paul", "J", 19}
@@ -88,4 +93,7 @@ func main() {
 	convertSGDtoIDR(salaryPerYear)
 	updateSalary := DataEmploye1.updateSalary(800)
 	fmt.Println("Your salary is updated from ", DataEmploye1.salary, ", become: ", updateSalary)
+
+	user3.changeFirstName("Rectulloci")
+	fmt.Println(user3)
 }
