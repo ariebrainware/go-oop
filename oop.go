@@ -1,10 +1,12 @@
 // This file contain Struct and Method example
 // struct: type StructName struct
 // method: func (r ReceiverType) funcName(parameters) (results)
+// interface: type interfaceName interface {}
 package main
 
 import (
 	"fmt"
+	"time"
 )
 
 // This is how we declare a struct
@@ -26,6 +28,14 @@ type DataEmployee struct {
 	salary int
 }
 
+type Birthday interface {
+	determineBornYear() int
+}
+
+type calculateYearOfBirth struct {
+	age int
+}
+
 func (e DataEmployee) displayYearlySalary() int {
 	salaryPerYear := e.salary * 12
 	return salaryPerYear
@@ -43,6 +53,16 @@ func convertSGDtoIDR(salary int) {
 func (e *UserDetail) changeFirstName(firstName string) string {
 	e.firstName = firstName
 	return e.firstName
+}
+
+func (userAge calculateYearOfBirth) determineBornYear() int {
+	y := time.Now().Year()
+	return y - userAge.age
+}
+
+func calculate(calcAge Birthday) int {
+	res := calcAge.determineBornYear()
+	return res
 }
 
 func main() {
@@ -94,6 +114,11 @@ func main() {
 	updateSalary := DataEmploye1.updateSalary(800)
 	fmt.Println("Your salary is updated from ", DataEmploye1.salary, ", become: ", updateSalary)
 
+	// Change user3 firstname
 	user3.changeFirstName("Rectulloci")
 	fmt.Println(user3)
+
+	// Calculate Year of Birth from user1
+	var data1 = calculateYearOfBirth{user1.age}
+	fmt.Println(user1.firstName, "Born in:", calculate(data1))
 }
